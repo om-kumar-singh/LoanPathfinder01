@@ -1,0 +1,74 @@
+:root {
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  color: #0f172a;
+  background: #f8fafc;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; }
+.layout {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 1rem 4rem;
+}
+header h1 { margin-bottom: 0.3rem; }
+header p { margin-top: 0; color: #334155; }
+
+.card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 1rem;
+  margin-top: 1rem;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+}
+
+.auth input, .card input {
+  width: 100%;
+  margin: 0.4rem 0;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 0.6rem;
+}
+
+button {
+  background: #0f766e;
+  color: white;
+  border: 0;
+  border-radius: 8px;
+  padding: 0.55rem 0.9rem;
+  cursor: pointer;
+  margin-top: 0.5rem;
+}
+
+.tabs { display: flex; gap: 0.5rem; margin-bottom: 0.5rem; }
+.tabs button { background: #64748b; }
+.tabs .active, .goal-buttons .active { background: #0f766e; }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.8rem;
+}
+
+.status { color: #0f766e; font-weight: 600; }
+.actions { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+
+.stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+.stat-card h3 { margin: 0.1rem 0 0; }
+.label { margin: 0; color: #475569; }
+.orange { border-left: 4px solid #f97316; }
+.green { border-left: 4px solid #22c55e; }
+
+.score-row { display: flex; gap: 0.8rem; align-items: center; }
+.meter { flex: 1; background: #e2e8f0; border-radius: 999px; height: 12px; overflow: hidden; }
+.fill { background: linear-gradient(90deg, #ef4444, #f59e0b, #22c55e); height: 100%; }
+.insights { list-style: none; padding-left: 0; margin-bottom: 0; }
+.insights li { display: flex; justify-content: space-between; border-bottom: 1px dashed #e2e8f0; padding: 0.3rem 0; }
+.positive { color: #16a34a; }
+.negative { color: #dc2626; }
+
+.goal-buttons { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.offer-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.8rem; margin-top: 0.8rem; }
+.offer-item { border: 1px solid #e2e8f0; padding: 0.8rem; border-radius: 10px; background: #f8fafc; }
+
+.sim-output { margin-top: 0.6rem; border: 1px solid #bae6fd; border-radius: 10px; padding: 0.6rem; background: #f0f9ff; }
