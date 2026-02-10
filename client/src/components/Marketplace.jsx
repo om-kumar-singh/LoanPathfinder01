@@ -17,6 +17,8 @@ export default function Marketplace({ offers, onGoalChange }) {
   return (
     <div className="card">
       <h2>Commission-Neutral Marketplace</h2>
+      <p className="intro">Offers are ranked only by your selected goal, not by lender commission.</p>
+
       <div className="goal-buttons">
         {goals.map((g) => (
           <button key={g.value} className={goal === g.value ? 'active' : ''} onClick={() => handleGoal(g.value)}>
@@ -26,6 +28,7 @@ export default function Marketplace({ offers, onGoalChange }) {
       </div>
 
       <div className="offer-list">
+        {offers.length === 0 && <p className="status">No matching offers yet. Run assessment to fetch rankings.</p>}
         {offers.map((offer) => (
           <article key={offer._id} className="offer-item">
             <h3>{offer.lenderName}</h3>

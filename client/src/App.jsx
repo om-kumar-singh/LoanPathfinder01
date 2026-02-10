@@ -18,6 +18,17 @@ const profileDefaults = {
   desiredLoanAmount: 350000
 };
 
+const profileFieldLabels = {
+  monthlyIncome: 'Monthly Income (₹)',
+  monthlyDebtPayment: 'Monthly Debt Payment (₹)',
+  creditUtilization: 'Credit Utilization (%)',
+  savingsBalance: 'Savings Balance (₹)',
+  employmentYears: 'Employment Years',
+  existingLoans: 'Existing Loans Count',
+  creditHistoryYears: 'Credit History (Years)',
+  desiredLoanAmount: 'Desired Loan Amount (₹)'
+};
+
 export default function App() {
   const [authMode, setAuthMode] = useState('register');
   const [credentials, setCredentials] = useState({ name: 'Aarav Singh', email: 'aarav@example.com', password: 'Pass@1234' });
@@ -26,7 +37,7 @@ export default function App() {
   const [assessment, setAssessment] = useState(null);
   const [simulation, setSimulation] = useState(null);
   const [offers, setOffers] = useState([]);
-  const [message, setMessage] = useState('Create an account to begin your loan-readiness journey.');
+  const [message, setMessage] = useState('Create your account to begin your loan-readiness journey.');
 
   const headers = useMemo(() => ({ Authorization: `Bearer ${token}` }), [token]);
 
@@ -36,16 +47,16 @@ export default function App() {
       const payload = authMode === 'register' ? credentials : { email: credentials.email, password: credentials.password };
       const { data } = await api.post(endpoint, payload);
       setToken(data.token);
-      setMessage(`Welcome, ${data.user.name}. Profile and run your assessment.`);
+      setMessage(`Welcome back, ${data.user.name}. Update your profile and run assessment.`);
     } catch (error) {
-      setMessage(error.response?.data?.message || 'Authentication failed');
+      setMessage(error.response?.data?.message || 'Authentication failed. Please retry.');
     }
   };
 
   const saveProfile = async () => {
     try {
       await api.put('/profile', profile, { headers });
-      setMessage('Profile updated. Now run your Loan Readiness Score.');
+      setMessage('Profile saved. You can now run the Loan Readiness Score.');
     } catch (error) {
       setMessage(error.response?.data?.message || 'Unable to save profile');
     }
@@ -54,7 +65,7 @@ export default function App() {
   const runAssessment = async () => {
     const { data } = await api.post('/assessment/run', {}, { headers });
     setAssessment(data);
-    setMessage('Assessment generated with transparent explanation factors.');
+    setMessage('Assessment generated with transparent factor-level explanation.');
     await loadOffers('lowest_total_interest');
   };
 
@@ -74,9 +85,10 @@ export default function App() {
 
   return (
     <main className="layout">
-      <header>
-        <h1>LoanPathfinder</h1>
-        <p>An explainable path from uncertainty to loan readiness.</p>
+      <header className="page-header">
+        <p className="eyebrow">LoanPathfinder</p>
+        <h1>Transparent Loan Assessment for Real-World Decisions</h1>
+        <p className="intro">Understand your eligibility, improve your profile, and compare offers on your terms.</p>
       </header>
 
       <section className="card auth">
@@ -84,8 +96,8 @@ export default function App() {
           <button className={authMode === 'register' ? 'active' : ''} onClick={() => setAuthMode('register')}>Register</button>
           <button className={authMode === 'login' ? 'active' : ''} onClick={() => setAuthMode('login')}>Login</button>
         </div>
-        {authMode === 'register' && <input value={credentials.name} onChange={(e) => setCredentials((p) => ({ ...p, name: e.target.value }))} placeholder="Name" />}
-        <input value={credentials.email} onChange={(e) => setCredentials((p) => ({ ...p, email: e.target.value }))} placeholder="Email" />
+        {authMode === 'register' && <input value={credentials.name} onChange={(e) => setCredentials((p) => ({ ...p, name: e.target.value }))} placeholder="Full Name" />}
+        <input value={credentials.email} onChange={(e) => setCredentials((p) => ({ ...p, email: e.target.value }))} placeholder="Email Address" />
         <input value={credentials.password} type="password" onChange={(e) => setCredentials((p) => ({ ...p, password: e.target.value }))} placeholder="Password" />
         <button onClick={submitAuth}>{authMode === 'register' ? 'Create Account' : 'Sign In'}</button>
       </section>
@@ -97,10 +109,10 @@ export default function App() {
           <section className="card">
             <h2>Financial Profile</h2>
             <div className="grid">
-              {Object.entries(profile).map(([k, v]) => (
-                <label key={k}>
-                  {k}
-                  <input type="number" value={v} onChange={(e) => updateProfile(k, e.target.value)} />
+              {Object.entries(profile).map(([field, value]) => (
+                <label key={field}>
+                  {profileFieldLabels[field]}
+                  <input type="number" value={value} onChange={(e) => updateProfile(field, e.target.value)} />
                 </label>
               ))}
             </div>
