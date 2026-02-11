@@ -191,6 +191,41 @@ npm test
 
 ---
 
+---
+
+## Deployment
+
+### Quick Deploy Options
+
+**Option 1: Vercel (Recommended - Full Stack)**
+- Deploy both frontend and backend together
+- See `DEPLOYMENT.md` for detailed instructions
+
+**Option 2: Frontend (GitHub Pages) + Backend (Railway/Render)**
+- Frontend: GitHub Pages (static files only)
+- Backend: Railway, Render, or Heroku
+- See `DEPLOYMENT.md` for setup
+
+**Option 3: Separate Deployments**
+- Frontend: Vercel
+- Backend: Railway/Render
+- See `DEPLOYMENT.md` for configuration
+
+### Environment Variables
+
+**Backend:**
+- `MONGO_URI` - MongoDB connection string
+- `JWT_SECRET` - Secret for JWT signing
+- `NODE_ENV` - `production`
+- `PORT` - Usually auto-set by platform
+
+**Frontend:**
+- `VITE_API_URL` - Your backend API URL (e.g., `https://your-backend.railway.app/api`)
+
+📖 **Full deployment guide:** See [DEPLOYMENT.md](./DEPLOYMENT.md)
+
+---
+
 ## License
 
 ISC (or your preferred license).
