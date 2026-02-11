@@ -56,15 +56,21 @@ export default function Register() {
         {error && <p className="error-msg">{error}</p>}
         <form onSubmit={handleSubmit}>
           <label>
-            Name
+            <span className="field-label">
+              Name<span className="required">*</span>
+            </span>
             <input type="text" name="name" value={form.name} onChange={handleChange} required autoComplete="name" />
           </label>
           <label>
-            Email
+            <span className="field-label">
+              Email<span className="required">*</span>
+            </span>
             <input type="email" name="email" value={form.email} onChange={handleChange} required autoComplete="email" />
           </label>
           <label>
-            Password (min 6)
+            <span className="field-label">
+              Password (min 6)<span className="required">*</span>
+            </span>
             <div className="password-wrap">
               <input
                 type={showPassword ? 'text' : 'password'}
@@ -97,19 +103,19 @@ export default function Register() {
             </div>
           </label>
           <label>
-            Monthly income (optional)
+            Monthly income
             <input type="number" name="monthlyIncome" min={0} step={1} value={form.monthlyIncome} onChange={handleChange} placeholder="e.g. 50000" />
           </label>
           <label>
-            Credit score (optional)
+            Credit score
             <input type="number" name="creditScore" min={300} max={850} value={form.creditScore} onChange={handleChange} placeholder="e.g. 720" />
           </label>
           <label>
-            Existing debt (optional)
+            Existing debt
             <input type="number" name="existingDebt" min={0} step={1} value={form.existingDebt} onChange={handleChange} placeholder="e.g. 15000" />
           </label>
           <label>
-            Savings (optional)
+            Savings
             <input type="number" name="savings" min={0} step={1} value={form.savings} onChange={handleChange} placeholder="e.g. 80000" />
           </label>
           <button type="submit" className="btn-primary" disabled={loading}>

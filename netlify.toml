@@ -1,0 +1,16 @@
+ [build]
+   base = "client"
+   command = "npm run build"
+   publish = "dist"
+
+ # Local dev settings (optional for Netlify CLI)
+ [dev]
+   command = "npm run dev"
+   port = 3000
+   targetPort = 3000
+
+ # SPA fallback so React Router works on hard refresh
+ [[redirects]]
+   from = "/*"
+   to = "/index.html"
+   status = 200

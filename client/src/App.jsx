@@ -8,6 +8,7 @@ import Dashboard from './pages/Dashboard';
 import LoanScore from './pages/LoanScore';
 import Simulator from './pages/Simulator';
 import Marketplace from './pages/Marketplace';
+import Profile from './pages/Profile';
 import './App.css';
 
 function App() {
@@ -50,6 +51,14 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <Marketplace />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/profile"
+                element={
+                  <ProtectedRoute>
+                    <Profile />
                   </ProtectedRoute>
                 }
               />

@@ -38,7 +38,9 @@ export default function Login() {
         {error && <p className="error-msg">{error}</p>}
         <form onSubmit={handleSubmit}>
           <label>
-            Email
+            <span className="field-label">
+              Email<span className="required">*</span>
+            </span>
             <input
               type="email"
               value={email}
@@ -48,7 +50,9 @@ export default function Login() {
             />
           </label>
           <label>
-            Password
+            <span className="field-label">
+              Password<span className="required">*</span>
+            </span>
             <div className="password-wrap">
               <input
                 type={showPassword ? 'text' : 'password'}

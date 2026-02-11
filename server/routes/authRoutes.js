@@ -3,6 +3,7 @@ const {
   registerUser,
   loginUser,
   getUserProfile,
+  updateUserProfile,
 } = require('../controllers/authController');
 const { protect } = require('../middleware/authMiddleware');
 
@@ -23,6 +24,7 @@ router.get('/', (req, res) => {
 router.post('/register', registerUser);
 router.post('/login', loginUser);
 router.get('/profile', protect, getUserProfile);
+router.put('/profile', protect, updateUserProfile);
 
 // Return 405 when /register or /login is called with GET (e.g. from browser)
 router.all('/register', (req, res) => {

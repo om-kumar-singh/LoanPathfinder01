@@ -155,8 +155,68 @@ const getUserProfile = async (req, res, next) => {
   }
 };
 
+/**
+ * @route   PUT /api/auth/profile
+ * @desc    Update logged-in user profile (protected)
+ */
+const updateUserProfile = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.user._id);
+    if (!user) {
+      const error = new Error('User not found');
+      error.statusCode = 404;
+      return next(error);
+    }
+
+    const { name, monthlyIncome, creditScore, existingDebt, savings } = req.body;
+
+    if (name) {
+      user.name = name.trim();
+    }
+
+    const numericFields = [
+      ['monthlyIncome', monthlyIncome],
+      ['creditScore', creditScore],
+      ['existingDebt', existingDebt],
+      ['savings', savings],
+    ];
+
+    for (const [field, value] of numericFields) {
+      if (value !== undefined && value !== '') {
+        const num = Number(value);
+        if (Number.isNaN(num) || num < 0) {
+          const error = new Error(`${field} must be a non-negative number`);
+          error.statusCode = 400;
+          return next(error);
+        }
+        user[field] = num;
+      }
+    }
+
+    const updated = await user.save();
+
+    res.status(200).json({
+      success: true,
+      message: 'Profile updated successfully',
+      user: {
+        _id: updated._id,
+        name: updated.name,
+        email: updated.email,
+        monthlyIncome: updated.monthlyIncome,
+        creditScore: updated.creditScore,
+        existingDebt: updated.existingDebt,
+        savings: updated.savings,
+        createdAt: updated.createdAt,
+      },
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
   registerUser,
   loginUser,
   getUserProfile,
+  updateUserProfile,
 };
