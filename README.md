@@ -55,6 +55,20 @@ loanpathfinder/
 
 ---
 
+## Diagrams & Screenshots
+
+The project is documented with the following visual components (typically included in the report / presentation assets):
+
+- **UI Screenshots / Component Flow** – end‑to‑end flow of key pages and navigation.
+- **Database Schema Diagram (ER / Collection diagram)** – MongoDB collections and their relationships.
+- **ML Workflow Diagram** – data preprocessing, scoring model, and prediction pipeline.
+- **SHAP Explanation Graph Screenshot** – feature importance and model interpretability view.
+- **Simulator Interface Screenshot** – what‑if simulator inputs and resulting score/APR.
+- **Marketplace Output Screen** – ranked loan offers for different user goals.
+- **Result Screen** – final readiness score and recommendation summary.
+
+---
+
 ## Prerequisites
 
 - **Node.js** >= 18
