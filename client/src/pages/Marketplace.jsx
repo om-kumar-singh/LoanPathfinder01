@@ -73,7 +73,7 @@ export default function Marketplace() {
                   <div className="loan-card-body">
                     <div className="loan-row">
                       <span>Interest rate</span>
-                      <strong>{loan.interestRate}%</strong>
+                      <strong>{(loan.assignedInterestRate ?? loan.interestRate)?.toFixed?.(2) ?? (loan.assignedInterestRate ?? loan.interestRate)}%</strong>
                     </div>
                     <div className="loan-row">
                       <span>Monthly payment</span>
